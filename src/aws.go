@@ -10,10 +10,11 @@ import (
 
 func main() {
 
-	os.Setenv("AWS_PROFILE", "default")
+	os.Setenv("AWS_PROFILE", "work")
 	os.Setenv("AWS_SHARED_CREDENTIALS_FILE", "credentials")
 	file := os.Getenv("AWS_SHARED_CREDENTIALS_FILE")
-	os.Setenv("AWS_REGION", "us-east-2")
+	// os.Setenv("AWS_REGION", "us-east-2")
+	os.Setenv("AWS_REGION", "eu-central-1")
 
 	sess := session.Must(session.NewSessionWithOptions(session.Options{
 		SharedConfigState: session.SharedConfigEnable,
