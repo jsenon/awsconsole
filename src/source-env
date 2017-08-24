@@ -1,0 +1,3 @@
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/Documents/awsconsole
+export PATH=$PATH:$GOPATH/bin
