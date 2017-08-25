@@ -3,3 +3,4 @@ pkg/
 credentials
 config
 src/source-env
+src/github.com
