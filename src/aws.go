@@ -10,20 +10,37 @@ import (
 
 func main() {
 
+	// os.Setenv("AWS_PROFILE", "oam-devops")
+
 	os.Setenv("AWS_PROFILE", "work")
+	os.Setenv("AWS_SDK_LOAD_CONFIG", "1")
+
 	os.Setenv("AWS_SHARED_CREDENTIALS_FILE", "credentials")
-	file := os.Getenv("AWS_SHARED_CREDENTIALS_FILE")
+	os.Setenv("AWS_CONFIG_FILE", "config")
+
 	// os.Setenv("AWS_REGION", "us-east-2")
 	os.Setenv("AWS_REGION", "eu-central-1")
 
-	sess := session.Must(session.NewSessionWithOptions(session.Options{
-		SharedConfigState: session.SharedConfigEnable,
-	}))
+	sess, err := session.NewSession()
+	if err != nil {
+		fmt.Println("Error:", err)
+	}
 
-	fmt.Println("File:", file)
+	// sess := session.Must(session.NewSessionWithOptions(session.Options{
+	// 	SharedConfigState: session.SharedConfigEnable,
+	// }))
+
+	fmt.Println("Key:", os.Getenv("AWS_ACCESS_KEY_ID"))
+
+	fmt.Println("File:", os.Getenv("AWS_SHARED_CREDENTIALS_FILE"))
+	// fmt.Println("Config:", configfile)
+
+	fmt.Println("CONFIG", os.Getenv("AWS_PROFILE"))
+
 	fmt.Println("Cred:", sess)
 
 	svc := ec2.New(sess)
+	// fmt.Println("error", err)
 
 	fmt.Println("Svc", svc)
 
@@ -39,6 +56,8 @@ func main() {
 		},
 	}
 	resp, _ := svc.DescribeInstances(params)
+
+	fmt.Println("Instance:", resp)
 
 	for idx, _ := range resp.Reservations {
 		for _, inst := range resp.Reservations[idx].Instances {

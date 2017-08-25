@@ -1,4 +1,5 @@
 bin/
 pkg/
 credentials
+config
 src/source-env
